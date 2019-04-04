@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/main_bg"
+    tools:context=".MainActivity">
+
+
+    <com.example.lightstudy.LightView
+        android:id="@+id/iv1"
+        android:layout_width="150dp"
+        android:layout_height="167dp"
+        app:light_color="#ffffffff"
+
+        app:light_radius="100"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/light2"
+        />
+<com.example.lightstudy.SaleProgressView
+    android:id="@+id/spv"
+    android:layout_width="200dp"
+    android:layout_height="30dp"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/iv1"
+    app:nearOverText="即将完成"
+    app:overText="已完成"
+    />
+    <!--<ImageView-->
+        <!--android:id="@+id/iv3"-->
+        <!--android:layout_width="150dp"-->
+        <!--android:layout_height="150dp"-->
+        <!--app:layout_constraintLeft_toLeftOf="parent"-->
+        <!--app:layout_constraintRight_toRightOf="parent"-->
+        <!--app:layout_constraintTop_toTopOf="parent"-->
+        <!--android:layout_marginTop="80dp"-->
+        <!--android:src="@drawable/light2"-->
+        <!--android:tint="@color/colorPrimary"-->
+        <!--android:visibility="gone"-->
+        <!--/>-->
+    <!--<ImageView-->
+        <!--android:layout_width="150dp"-->
+        <!--android:layout_height="150dp"-->
+        <!--app:layout_constraintLeft_toLeftOf="parent"-->
+        <!--app:layout_constraintRight_toRightOf="parent"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/iv1"-->
+        <!--android:layout_marginTop="20dp"-->
+        <!--android:src="@drawable/light_un"-->
+        <!--/>-->
+</android.support.constraint.ConstraintLayout>
