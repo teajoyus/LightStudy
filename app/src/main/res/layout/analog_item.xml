@@ -36,11 +36,10 @@
         </LinearLayout>
         <ImageView
             android:id="@+id/iv"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_gravity="center"
             android:src="@drawable/xiao"
-            android:tint="@color/colorPrimary"
             />
     </LinearLayout>
 </android.support.v7.widget.CardView>

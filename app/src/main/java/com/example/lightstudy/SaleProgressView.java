@@ -201,7 +201,7 @@ public class SaleProgressView extends View {
     //绘制文字信息
     private void drawText(Canvas canvas) {
         String scaleText = new DecimalFormat("#%").format(scale);
-        String saleText = String.format("已经学习%s秒", progressCount);
+        String saleText = String.format("已经学习%s分钟", progressCount);
 
         float scaleTextWidth = textPaint.measureText(scaleText);
 

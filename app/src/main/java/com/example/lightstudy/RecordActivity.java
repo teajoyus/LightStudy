@@ -131,21 +131,25 @@ public class RecordActivity extends AppCompatActivity {
 //            timeStudy.endTime = (System.currentTimeMillis()+10000L)+"";
             timeStudy.status = 1;
             timeStudy.mark = "开始学习";
+            helper.insert(timeStudy);
              timeStudy = new TimeStudy();
             timeStudy.startTime = System.currentTimeMillis()+"";
 //            timeStudy.endTime = (System.currentTimeMillis()+10000L)+"";
             timeStudy.status = 3;
             timeStudy.mark = "提前退出";
+            helper.insert(timeStudy);
              timeStudy = new TimeStudy();
             timeStudy.startTime = System.currentTimeMillis()+"";
 //            timeStudy.endTime = (System.currentTimeMillis()+10000L)+"";
             timeStudy.status = 1;
             timeStudy.mark = "开始学习";
+            helper.insert(timeStudy);
              timeStudy = new TimeStudy();
             timeStudy.startTime = System.currentTimeMillis()+"";
 //            timeStudy.endTime = (System.currentTimeMillis()+10000L)+"";
             timeStudy.status = 2;
             timeStudy.mark = "学习完成";
+            helper.insert(timeStudy);
         }
         list = helper.findAllData(this);
         Log.i(TAG,"list:"+list);
@@ -182,7 +186,7 @@ public class RecordActivity extends AppCompatActivity {
             }else if(timeStudy.status==3){
                 final Drawable ku = getResources().getDrawable(R.drawable.ku);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    ku.setTint(getResources().getColor(R.color.colorPrimary));
+                    ku.setTint(0xFFFFC107);
                 }
                 holder.iv.setImageDrawable(ku);
             }else{

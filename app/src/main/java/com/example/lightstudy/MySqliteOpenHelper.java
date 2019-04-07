@@ -5,35 +5,36 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MySqliteOpenHelper<T extends ReflectObject> extends SQLiteOpenHelper {
+    private static final String TAG = "MySqliteOpenHelper";
+    private static final int VERSION = 1;
     public SQLiteDatabase db;
     public  String tableName;
     public Class entryClass;
     private Context context;
-    private boolean hasTable = true;
+//    private boolean hasTable = true;
     public MySqliteOpenHelper(Context context) {
-        super(context, "sql_data.db", null, 5);
+        super(context, "sql_data.db", null, VERSION);
     }
 
     public MySqliteOpenHelper(Context context, Class<? extends ReflectObject> type) {
-        super(context, "sql_data.db", null, 5);
+        super(context, "sql_data.db", null, VERSION);
+        Log.i(TAG,"MySqliteOpenHelper");
         entryClass = type;
         tableName = entryClass.getSimpleName().toLowerCase();
         this.context = context;
-        if(!hasTable){
-            createTable();
-        }
     }
 
-    private void createTable() {
+    private void createTable(SQLiteDatabase db) {
         try {
             ReflectObject o = (ReflectObject) entryClass.newInstance();
-            getWritableDatabase().execSQL(o.makeSQLTable());
+            db.execSQL(o.makeSQLTable());
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         } catch (InstantiationException e) {
@@ -43,13 +44,15 @@ public class MySqliteOpenHelper<T extends ReflectObject> extends SQLiteOpenHelpe
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        hasTable = false;
+        Log.i(TAG,"onCreate");
+//        hasTable = false;
+        createTable(db);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // TODO Auto-generated method stub
-
+        Log.i(TAG,"onUpgrade");
     }
 
     /**

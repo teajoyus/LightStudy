@@ -120,35 +120,10 @@ public class FirstActivity extends AppCompatActivity {
         startActivity(new Intent(this, MainActivity.class));
     }
 
-    /**
-     * 将dp转换成px
-     *
-     * @param dpValue
-     * @return
-     */
-    public int dp2px(float dpValue) {
-        return dp2px(this, dpValue);
-    }
 
-    public static int dp2px(Context context, float dpValue) {
-        final float scale = context.getResources().getDisplayMetrics().density;
-        return (int) (dpValue * scale + 0.5f);
-    }
-
-    /**
-     * 将像素转换成dp
-     *
-     * @param context
-     * @param pxValue
-     * @return
-     */
-    public static int px2dp(Context context, float pxValue) {
-        final float scale = context.getResources().getDisplayMetrics().density;
-        return (int) (pxValue / scale + 0.5f);
-    }
 
     public void onClickStudy(View view) {
-        startActivity(new Intent(this, MainActivity.class));
+//        startActivity(new Intent(this, MainActivity.class));
     }
 
     public void onClickRecord(View view) {
