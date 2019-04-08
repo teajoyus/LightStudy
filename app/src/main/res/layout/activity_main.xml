@@ -41,6 +41,7 @@
     app:layout_constraintTop_toBottomOf="@+id/iv1"
     app:nearOverText="即将完成"
     app:overText="恭喜您学习完成"
+    android:visibility="gone"
     />
 
 </android.support.constraint.ConstraintLayout>

@@ -92,66 +92,46 @@ public class RecordActivity extends AppCompatActivity {
     }
 
     private void initData() {
-//        final List<Analog> analogs = new ArrayList<>();
-//
-//        Analog analog0 = new Analog();
-//        analog0.isHead = true;
-//        analog0.text = "更新了日志";
-//        analog0.time = "2016-01-08 10:20:10";
-//        analogs.add(analog0);
-//
-//        Analog analog1 = new Analog();
-//        analog1.isHead = false;
-//        analog1.text = "上传了图片";
-//        analog1.time = "2016-01-02 15:10:10";
-//        analogs.add(analog1);
-//
-//        Analog analog2 = new Analog();
-//        analog2.isHead = false;
-//        analog2.text = "开通了空间";
-//        analog2.time = "2016-01-01 10:10:10";
-//        analogs.add(analog2);
-
-        list = helper.findAllData(this);
-        if(list.size()==0){
-            TimeStudy timeStudy = new TimeStudy();
-            timeStudy.startTime = System.currentTimeMillis()+"";
+//        list = helper.findAllData(this);
+//        if(list.size()==0){
+//            TimeStudy timeStudy = new TimeStudy();
+//            timeStudy.startTime = System.currentTimeMillis()+"";
+////            timeStudy.endTime = (System.currentTimeMillis()+10000L)+"";
+//            timeStudy.status = 1;
+//            timeStudy.mark = "开始学习";
+//            helper.insert(timeStudy);
+//            timeStudy = new TimeStudy();
+//            timeStudy.startTime = System.currentTimeMillis()+"";
 //            timeStudy.endTime = (System.currentTimeMillis()+10000L)+"";
-            timeStudy.status = 1;
-            timeStudy.mark = "开始学习";
-            helper.insert(timeStudy);
-            timeStudy = new TimeStudy();
-            timeStudy.startTime = System.currentTimeMillis()+"";
-            timeStudy.endTime = (System.currentTimeMillis()+10000L)+"";
-            timeStudy.status = 2;
-            timeStudy.mark = "学习完成";
-            helper.insert(timeStudy);
-             timeStudy = new TimeStudy();
-            timeStudy.startTime = System.currentTimeMillis()+"";
-//            timeStudy.endTime = (System.currentTimeMillis()+10000L)+"";
-            timeStudy.status = 1;
-            timeStudy.mark = "开始学习";
-            helper.insert(timeStudy);
-             timeStudy = new TimeStudy();
-            timeStudy.startTime = System.currentTimeMillis()+"";
-//            timeStudy.endTime = (System.currentTimeMillis()+10000L)+"";
-            timeStudy.status = 3;
-            timeStudy.mark = "提前退出";
-            helper.insert(timeStudy);
-             timeStudy = new TimeStudy();
-            timeStudy.startTime = System.currentTimeMillis()+"";
-//            timeStudy.endTime = (System.currentTimeMillis()+10000L)+"";
-            timeStudy.status = 1;
-            timeStudy.mark = "开始学习";
-            helper.insert(timeStudy);
-             timeStudy = new TimeStudy();
-            timeStudy.startTime = System.currentTimeMillis()+"";
-//            timeStudy.endTime = (System.currentTimeMillis()+10000L)+"";
-            timeStudy.status = 2;
-            timeStudy.mark = "学习完成";
-            helper.insert(timeStudy);
-        }
-        list = helper.findAllData(this);
+//            timeStudy.status = 2;
+//            timeStudy.mark = "学习完成";
+//            helper.insert(timeStudy);
+//             timeStudy = new TimeStudy();
+//            timeStudy.startTime = System.currentTimeMillis()+"";
+////            timeStudy.endTime = (System.currentTimeMillis()+10000L)+"";
+//            timeStudy.status = 1;
+//            timeStudy.mark = "开始学习";
+//            helper.insert(timeStudy);
+//             timeStudy = new TimeStudy();
+//            timeStudy.startTime = System.currentTimeMillis()+"";
+////            timeStudy.endTime = (System.currentTimeMillis()+10000L)+"";
+//            timeStudy.status = 3;
+//            timeStudy.mark = "提前退出";
+//            helper.insert(timeStudy);
+//             timeStudy = new TimeStudy();
+//            timeStudy.startTime = System.currentTimeMillis()+"";
+////            timeStudy.endTime = (System.currentTimeMillis()+10000L)+"";
+//            timeStudy.status = 1;
+//            timeStudy.mark = "开始学习";
+//            helper.insert(timeStudy);
+//             timeStudy = new TimeStudy();
+//            timeStudy.startTime = System.currentTimeMillis()+"";
+////            timeStudy.endTime = (System.currentTimeMillis()+10000L)+"";
+//            timeStudy.status = 2;
+//            timeStudy.mark = "学习完成";
+//            helper.insert(timeStudy);
+//        }
+        list = helper.findData(this,null,null,null,null,null,"startTime desc");
         Log.i(TAG,"list:"+list);
         adapter.setItems(list);
     }

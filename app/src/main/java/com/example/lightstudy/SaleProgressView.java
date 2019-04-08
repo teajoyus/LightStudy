@@ -14,6 +14,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 import java.text.DecimalFormat;
@@ -23,6 +24,7 @@ import java.text.DecimalFormat;
  */
 public class SaleProgressView extends View {
 
+    private static final String TAG = "SaleProgressView";
     //商品总数
     private int totalCount;
     //当前卖出数
@@ -201,7 +203,7 @@ public class SaleProgressView extends View {
     //绘制文字信息
     private void drawText(Canvas canvas) {
         String scaleText = new DecimalFormat("#%").format(scale);
-        String saleText = String.format("已经学习%s分钟", progressCount);
+        String saleText = String.format("已经学习%s秒", progressCount);
 
         float scaleTextWidth = textPaint.measureText(scaleText);
 
@@ -243,6 +245,7 @@ public class SaleProgressView extends View {
         if (currentCount > totalCount) {
             currentCount = totalCount;
         }
+        Log.i(TAG,"setTotalAndCurrentCount totalCount:"+totalCount+",currentCount:"+currentCount);
         this.currentCount = currentCount;
         postInvalidate();
     }

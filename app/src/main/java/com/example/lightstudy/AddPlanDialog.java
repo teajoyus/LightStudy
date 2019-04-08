@@ -4,26 +4,30 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.NumberPicker;
+import android.widget.Toast;
 
-public class TimePickerDialog extends Dialog implements NumberPicker.OnValueChangeListener, NumberPicker.Formatter,NumberPicker.OnScrollListener {
+public class AddPlanDialog extends Dialog implements NumberPicker.OnValueChangeListener, NumberPicker.Formatter,NumberPicker.OnScrollListener {
     private static final String TAG = "TimePickerDialog";
     NumberPicker hourPicker,minutePicker;
+    EditText et;
     int hour,min;
     onSlectedListener onSlectedListener;
-    public TimePickerDialog(Context context) {
+    public AddPlanDialog(Context context) {
         super(context);
     }
 
-    public TimePickerDialog(Context context, int themeResId) {
+    public AddPlanDialog(Context context, int themeResId) {
         super(context, themeResId);
     }
 
-    protected TimePickerDialog(Context context, boolean cancelable, DialogInterface.OnCancelListener cancelListener) {
+    protected AddPlanDialog(Context context, boolean cancelable, DialogInterface.OnCancelListener cancelListener) {
         super(context, cancelable, cancelListener);
     }
 
@@ -31,24 +35,30 @@ public class TimePickerDialog extends Dialog implements NumberPicker.OnValueChan
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.time_picker_layout);
+        setContentView(R.layout.add_plan_layout);
         hourPicker=(NumberPicker) findViewById(R.id.hourpicker);
         minutePicker=(NumberPicker) findViewById(R.id.minuteicker);
+        et= findViewById(R.id.et);
         init();
         findViewById(R.id.start).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String content = et.getText().toString();
+                if(TextUtils.isEmpty(content)){
+                    Toast.makeText(getContext(),"请输入学习内容",Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 dismiss();
                 if(onSlectedListener!=null){
                     Log.i(TAG,"hour:"+hour+",min:"+min);
-                    onSlectedListener.onSelected(hour,min);
+                    onSlectedListener.onSelected(hour,min,content);
                 }
             }
         });
 
     }
 
-    public void setOnSlectedListener(TimePickerDialog.onSlectedListener onSlectedListener) {
+    public void setOnSlectedListener(onSlectedListener onSlectedListener) {
         this.onSlectedListener = onSlectedListener;
     }
 
@@ -56,8 +66,8 @@ public class TimePickerDialog extends Dialog implements NumberPicker.OnValueChan
     public void show() {
         super.show();
         final WindowManager.LayoutParams params = getWindow().getAttributes();
-        params.width = Utils.dp2px(getContext(),200);
-        params.height = Utils.dp2px(getContext(),290);
+        params.width = Utils.dp2px(getContext(),240);
+        params.height = Utils.dp2px(getContext(),350);
         getWindow().setAttributes(params);
         getWindow().setGravity(Gravity.CENTER);
         getWindow().setBackgroundDrawableResource(android.R.color.transparent);
@@ -109,6 +119,6 @@ public class TimePickerDialog extends Dialog implements NumberPicker.OnValueChan
         }
     }
     public interface onSlectedListener{
-        void onSelected(int hor,int min);
+        void onSelected(int hor,int min,String content);
     }
 }

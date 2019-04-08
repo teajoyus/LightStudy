@@ -12,13 +12,17 @@ public class TimeStudy extends ReflectObject{
     public int result;
     public int status;//状态：1、开始学习；2、学习完成；3、学习提前退出；
     public String mark;
-    public TimeStudy(int id, String startTime, String endTime, int planDuration, int result, String mark) {
+    public String lightStyleName;//收集到的灯泡样式
+    public int lightLayout;//收集到的灯泡摆放位置 1：top 2：bottom
+    public TimeStudy(int id, String startTime, String endTime, int planDuration, int result, String mark,String lightStyleName,int lightLayout) {
         this.id = id;
         this.startTime = startTime;
         this.endTime = endTime;
         this.planDuration = planDuration;
         this.result = result;
         this.mark = mark;
+        this.lightStyleName = lightStyleName;
+        this.lightLayout = lightLayout;
     }
     public TimeStudy() {
     }
@@ -42,4 +46,6 @@ public class TimeStudy extends ReflectObject{
         System.out.println(object);
 
     }
+
+
 }

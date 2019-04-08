@@ -15,23 +15,28 @@ public class MySqliteOpenHelper<T extends ReflectObject> extends SQLiteOpenHelpe
     private static final String TAG = "MySqliteOpenHelper";
     private static final int VERSION = 1;
     public SQLiteDatabase db;
-    public  String tableName;
+    public String tableName;
     public Class entryClass;
     private Context context;
-//    private boolean hasTable = true;
+    private boolean hasDataBase = true;
+
     public MySqliteOpenHelper(Context context) {
         super(context, "sql_data.db", null, VERSION);
     }
 
     public MySqliteOpenHelper(Context context, Class<? extends ReflectObject> type) {
         super(context, "sql_data.db", null, VERSION);
-        Log.i(TAG,"MySqliteOpenHelper");
+        Log.i(TAG, "MySqliteOpenHelper db:" + getWritableDatabase());
         entryClass = type;
         tableName = entryClass.getSimpleName().toLowerCase();
         this.context = context;
+        createTable(getWritableDatabase());
     }
 
     private void createTable(SQLiteDatabase db) {
+        if (entryClass == null) {
+            return;
+        }
         try {
             ReflectObject o = (ReflectObject) entryClass.newInstance();
             db.execSQL(o.makeSQLTable());
@@ -44,15 +49,16 @@ public class MySqliteOpenHelper<T extends ReflectObject> extends SQLiteOpenHelpe
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        Log.i(TAG,"onCreate");
+        Log.i(TAG, "onCreate");
 //        hasTable = false;
-        createTable(db);
+//        hasDataBase = false;
+//        createTable(db);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // TODO Auto-generated method stub
-        Log.i(TAG,"onUpgrade");
+        Log.i(TAG, "onUpgrade");
     }
 
     /**
@@ -62,12 +68,29 @@ public class MySqliteOpenHelper<T extends ReflectObject> extends SQLiteOpenHelpe
      * @return
      */
     public List<T> findAllData(Context context) {
+        return findData(context,null,null,null,null,null,null);
+    }
+
+    /**
+     * 返回所有的记录记录
+     * @param context
+     * @param columns  要查询的字段
+     * @param selection  查询约束条件
+     * @param selectionArgs 查询约束条件的参数替换
+     * @param groupBy 分组
+     * @param having
+     * @param orderBy 排序
+     * @return
+     */
+    public List<T> findData(Context context, String[] columns, String selection,
+                               String[] selectionArgs, String groupBy, String having,
+                               String orderBy) {
         // TODO Auto-generated method stub
         List<T> list = new ArrayList<T>();
         try {
             setDataBase(context);
             T object = null;
-            Cursor c = db.query(tableName, null, null, null, null, null, null);
+            Cursor c = db.query(tableName, columns, selection, selectionArgs, groupBy, having, orderBy);
             while (c.moveToNext()) {
                 try {
                     object = (T) entryClass.newInstance();
@@ -170,7 +193,7 @@ public class MySqliteOpenHelper<T extends ReflectObject> extends SQLiteOpenHelpe
 
     public void setDataBase(Context context) throws IOException {
 //        MySqliteOpenHelper helper = new MySqliteOpenHelper(context);
-            db = getWritableDatabase();
+        db = getWritableDatabase();
     }
 
     private static ContentValues putContentValues(ReflectObject object) {

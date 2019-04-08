@@ -150,7 +150,7 @@ public class ReflectObject {
 
     public String makeSQLTable() {
         String table = getClass().getSimpleName().toLowerCase();
-        String s = "create table " + table + "("
+        String s = "create table if not exists  " + table + "("
                 + "id integer primary key autoincrement ";
 //        String s = "create table " + table + "("
 //                + "id integer primary key autoincrement "
